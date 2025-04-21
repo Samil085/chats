@@ -17,7 +17,7 @@ DarkChat, Socket.IO və Node.js istifadə edilərək hazırlanmış müasir və 
 
 1. Repozitroniyi klonlayın:
 ```bash
-git clone https://github.com/yourusername/darkchat.git
+git clone https://github.com/Samil085/chats.git
 cd darkchat
 ```
 
@@ -80,9 +80,3 @@ darkchat/
 ## Lisenziya
 
 Bu layihə MIT lisenziyası altında lisenziyalanıb. Ətraflı məlumat üçün [LICENSE](LICENSE) faylına baxın.
-
-## Əlaqə
-
-- Vebsayt: [your-website.com](https://your-website.com)
-- GitHub: [@yourusername](https://github.com/yourusername)
-- E-poçt: your.email@example.com 
