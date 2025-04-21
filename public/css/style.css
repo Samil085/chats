@@ -1,0 +1,155 @@
+/* Genel Stiller */
+.hidden {
+    display: none !important;
+}
+
+/* Mesaj Stilleri */
+.message {
+    max-width: 80%;
+    margin-bottom: 1rem;
+}
+
+.message.sent {
+    margin-left: auto;
+}
+
+.message.received {
+    margin-right: auto;
+}
+
+.message.system {
+    max-width: 100%;
+    text-align: center;
+    margin: 1rem 0;
+}
+
+.message-content {
+    background-color: #374151;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+}
+
+.message.sent .message-content {
+    background-color: #5b21b6;
+}
+
+.message.system .message-content {
+    background-color: transparent;
+    color: #9ca3af;
+    font-style: italic;
+}
+
+/* Kullanıcı Listesi Stilleri */
+.user-item {
+    transition: all 0.2s ease;
+}
+
+.user-item:hover {
+    background-color: #374151;
+}
+
+/* Grup Listesi Stilleri */
+.group-item {
+    padding: 0.5rem;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.group-item:hover {
+    background-color: #374151;
+}
+
+/* Scrollbar Stilleri */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1f2937;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #4b5563;
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #6b7280;
+}
+
+/* Animasyonlar */
+.new-message {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Form Elementleri */
+input:focus, button:focus {
+    outline: none;
+    ring: 2px;
+    ring-color: #7c3aed;
+}
+
+/* Özel Scrollbar Tasarımı */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1f2937;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #4b5563;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #6b7280;
+}
+
+/* Kullanıcı ve Grup Listeleri */
+.user-item, .group-item {
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    margin-bottom: 0.5rem;
+    background-color: #374151;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.user-item:hover, .group-item:hover {
+    background-color: #4b5563;
+    transform: translateX(4px);
+}
+
+.user-item.online {
+    border-left: 4px solid #10b981;
+}
+
+.user-item.offline {
+    border-left: 4px solid #ef4444;
+}
+
+/* Animasyonlar */
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.animate-pulse {
+    animation: pulse 2s infinite;
+} 

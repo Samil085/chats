@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DarkChat</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+<body class="bg-gray-900 text-white">
+    <!-- Giriş/Kayıt Formu -->
+    <div id="auth-form" class="container mx-auto px-4 py-8">
+        <div class="max-w-md mx-auto bg-gray-800 rounded-lg p-6">
+            <div class="flex mb-6">
+                <button id="login-tab" class="flex-1 py-2 text-center text-purple-500 border-b-2 border-purple-500">Giriş</button>
+                <button id="register-tab" class="flex-1 py-2 text-center text-gray-400">Kayıt</button>
+            </div>
+
+            <!-- Giriş Formu -->
+            <form id="login-form" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium mb-1">Kullanıcı Adı</label>
+                    <input type="text" id="login-username" class="w-full px-3 py-2 bg-gray-700 rounded-lg">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1">Şifre</label>
+                    <input type="password" id="login-password" class="w-full px-3 py-2 bg-gray-700 rounded-lg">
+                </div>
+                <button type="button" id="login-button" class="w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700">
+                    Giriş Yap
+                </button>
+            </form>
+
+            <!-- Kayıt Formu -->
+            <form id="register-form" class="space-y-4 hidden">
+                <div>
+                    <label class="block text-sm font-medium mb-1">Kullanıcı Adı</label>
+                    <input type="text" id="register-username" class="w-full px-3 py-2 bg-gray-700 rounded-lg">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1">Şifre</label>
+                    <input type="password" id="register-password" class="w-full px-3 py-2 bg-gray-700 rounded-lg">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1">Avatar URL (İsteğe bağlı)</label>
+                    <input type="text" id="register-avatar" class="w-full px-3 py-2 bg-gray-700 rounded-lg">
+                </div>
+                <button type="button" id="register-button" class="w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700">
+                    Kayıt Ol
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Chat Arayüzü -->
+    <div id="chat-container" class="hidden h-screen flex">
+        <!-- Sol Panel -->
+        <div class="w-64 bg-gray-800 p-4 flex flex-col">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-bold">DarkChat</h2>
+                <button id="logout-button" class="text-sm text-red-400 hover:text-red-300">Çıkış</button>
+            </div>
+
+            <!-- Gruplar -->
+            <div class="mb-6">
+                <div class="flex justify-between items-center mb-2">
+                    <h3 class="font-medium">Gruplar</h3>
+                    <button id="create-group" class="text-sm text-purple-400 hover:text-purple-300 hidden">
+                        + Yeni Grup
+                    </button>
+                </div>
+                <input type="text" id="group-search" placeholder="Grup ara..." 
+                       class="w-full px-3 py-2 bg-gray-700 rounded-lg mb-2 text-sm">
+                <div id="groups-list" class="space-y-1 overflow-y-auto max-h-40"></div>
+            </div>
+
+            <!-- Kullanıcılar -->
+            <div class="flex-1">
+                <h3 id="users-title" class="font-medium mb-2">Kullanıcılar (0/0)</h3>
+                <input type="text" id="user-search" placeholder="Kullanıcı ara..." 
+                       class="w-full px-3 py-2 bg-gray-700 rounded-lg mb-2 text-sm">
+                <div id="users-list" class="space-y-1 overflow-y-auto" style="max-height: calc(100vh - 300px);"></div>
+            </div>
+        </div>
+
+        <!-- Sağ Panel -->
+        <div class="flex-1 bg-gray-900 flex flex-col">
+            <!-- Chat Başlığı -->
+            <div class="bg-gray-800 p-4">
+                <h2 id="chat-subtitle" class="text-lg">Sohbet başlatmak için bir kullanıcı veya grup seçin</h2>
+            </div>
+
+            <!-- Mesajlar -->
+            <div id="messages" class="flex-1 overflow-y-auto p-4 space-y-4"></div>
+
+            <!-- Mesaj Gönderme -->
+            <div class="bg-gray-800 p-4">
+                <div class="flex space-x-2">
+                    <input type="text" id="message-input" 
+                           class="flex-1 px-3 py-2 bg-gray-700 rounded-lg" 
+                           placeholder="Mesajınızı yazın...">
+                    <button id="send-button" class="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700">
+                        Gönder
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Grup Oluşturma Modal -->
+    <div id="create-group-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+        <div class="bg-gray-800 p-6 rounded-lg w-96">
+            <h3 class="text-lg font-medium mb-4">Yeni Grup Oluştur</h3>
+            <input type="text" id="group-name" placeholder="Grup adı" 
+                   class="w-full px-3 py-2 bg-gray-700 rounded-lg mb-4">
+            <div class="flex justify-end space-x-2">
+                <button id="cancel-group" class="px-4 py-2 text-gray-400 hover:text-gray-300">İptal</button>
+                <button id="save-group" class="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700">
+                    Oluştur
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bildirim Sesi -->
+    <audio id="notification-sound" src="/sounds/notification.wav"></audio>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/main.js"></script>
+</body>
+</html> 
